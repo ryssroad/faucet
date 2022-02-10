@@ -1,6 +1,6 @@
 <template lang="pug">
 .section-header
-  h1 Cosmos Testnet Faucet
+  h1 Teleport Testnet Faucet
   p Hello intrepid spaceperson! Use this faucet to get tokens for the #[span.chain {{ config.chain }}] testnet. Please don't abuse this service&mdash;the number of available tokens is limited.
 </template>
 
