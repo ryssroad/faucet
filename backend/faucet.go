@@ -11,7 +11,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/dpapathanasiou/go-recaptcha"
 	"github.com/joho/godotenv"
 	"github.com/tendermint/tmlibs/bech32"
 	"github.com/tomasen/realip"
@@ -42,7 +41,7 @@ func getEnv(key string) string {
 }
 
 func main() {
-	err := godotenv.Load(".env.local", ".env")
+	err := godotenv.Load()
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}

@@ -65,6 +65,7 @@ Then build the frontend.
 ```
 yarn
 yarn build
+yarn serve
 ```
 
 Lastly, serve the `./frontend/dist` directory with the web server of your choice.

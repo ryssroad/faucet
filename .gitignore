@@ -3,3 +3,6 @@ vendor
 .DS_Store
 backend/faucet
 backend/.env.local
+
+# IDE
+.idea/
