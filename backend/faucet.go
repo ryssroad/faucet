@@ -3,6 +3,9 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/joho/godotenv"
+	"github.com/tendermint/tmlibs/bech32"
+	"github.com/tomasen/realip"
 	"io"
 	"log"
 	"net/http"
@@ -10,10 +13,7 @@ import (
 	"os/exec"
 	"strings"
 	"time"
-
-	"github.com/joho/godotenv"
-	"github.com/tendermint/tmlibs/bech32"
-	"github.com/tomasen/realip"
+	"github.com/dpapathanasiou/go-recaptcha"
 )
 
 var chain string
