@@ -98,6 +98,9 @@ func getCmd(command string) *exec.Cmd {
 
 func getCoinsHandler(w http.ResponseWriter, request *http.Request) {
 	var claim claim_struct
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+
+	fmt.Println("we have received new message")
 
 	// decode JSON response from front end
 	decoder := json.NewDecoder(request.Body)
@@ -105,6 +108,7 @@ func getCoinsHandler(w http.ResponseWriter, request *http.Request) {
 	if decoderErr != nil {
 		panic(decoderErr)
 	}
+	fmt.Println("test1")
 
 	// make sure address is bech32
 	readableAddress, decodedAddress, decodeErr := bech32.DecodeAndConvert(claim.Address)
@@ -116,6 +120,7 @@ func getCoinsHandler(w http.ResponseWriter, request *http.Request) {
 	if encodeErr != nil {
 		panic(encodeErr)
 	}
+	fmt.Println("test2")
 
 	// make sure captcha is valid
 	clientIP := realip.FromRequest(request)
@@ -124,12 +129,15 @@ func getCoinsHandler(w http.ResponseWriter, request *http.Request) {
 	if captchaErr != nil {
 		panic(captchaErr)
 	}
+	fmt.Println("test3")
 
 	// send the coins!
 	if captchaPassed {
-		// teleport tx bank send val teleport1xf4erjwp92f8efls2qnka0famwcfyammcy9avp 100000000000000000000atele --gas-prices 5000000000atele  --node tcp://10.41.20.10:26657 --chain-id teleport_7001-1
+		// demo erc20 address: ab4c7f7184a2362048576a312d0b0257bc44e070
+		// teleport tx bank send validator0 teleport14dx87uvy5gmzqjzhdgcj6zcz277yfcrsmcws6m 100000000000000000000atele --gas-prices 5000000000atele  --node tcp://localhost:26657 --chain-id teleport_7001-1 --keyring-backend test --home ~/teleport_testnet/validators/validator0/teleport -y
 		sendFaucet := fmt.Sprintf(
-			"teleport tx bank send validator0 %v %v --gas-prices 5000000000atele --node %v --chain-id %v --keyring-backend test -y",
+			"teleport tx bank send validator0 %v %v --gas-prices 5000000000atele --node %v --chain-id %v --keyring-backend test"+
+				" --home ~/teleport_testnet/validators/validator0/teleport -y",
 			encodedAddress, amountFaucet, node, chain)
 		fmt.Println(time.Now().UTC().Format(time.RFC3339), encodedAddress, "[1]")
 		executeCmd(sendFaucet, pass)
